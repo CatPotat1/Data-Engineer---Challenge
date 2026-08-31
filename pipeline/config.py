@@ -18,8 +18,6 @@ def _required(name: str) -> str:
             dedent(
                 f"""
                 Missing required environment variable {name!r}.
-                Locally: copy .env.example to .env and fill it in.
-                In CI: add it under Settings > Secrets and variables > Actions.
                 """
             ).strip()
         )
@@ -34,16 +32,6 @@ def _validate_database_url(url: str) -> None:
         )
 
     password = match.group(1)
-
-    if "YOUR-PASSWORD" in password.upper() or password.startswith("["):
-        raise RuntimeError(
-            dedent(
-                """
-                DATABASE_URL still contains Supabase's [YOUR-PASSWORD] placeholder.
-                Replace it with your real database password, brackets removed.
-                """
-            ).strip()
-        )
     
     unsafe = sorted(set(password) & set("@/?#[] "))
     if unsafe:
@@ -54,8 +42,6 @@ def _validate_database_url(url: str) -> None:
                 The password in DATABASE_URL contains {chars}, which must be
                 percent-encoded inside a URL (@ -> %40, / -> %2F, # -> %23,
                 ? -> %3F, space -> %20).
-                Simplest fix: reset the database password in Supabase
-                (Settings > Database) to an alphanumeric one.
                 """
             ).strip()
         )
