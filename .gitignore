@@ -21,7 +21,6 @@ data/
 !package.json
 *.db
 *.sqlite3
-*.txt
 
 # --- OS / editor noise ---
 .DS_Store
