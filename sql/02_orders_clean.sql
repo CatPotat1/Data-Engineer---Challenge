@@ -1,6 +1,6 @@
 set local timezone = 'UTC';   -- makes every timestamp cast deterministic
 
-drop table if exists orders_clean;
+drop table if exists orders_clean cascade;
 
 create table orders_clean as
 
