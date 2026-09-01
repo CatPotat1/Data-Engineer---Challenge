@@ -2,7 +2,9 @@ name: Daily refresh
 
 on:
   schedule:
-    - cron: "0 12 * * *"
+    - cron: "20 12 * * *"
+    - cron: "00 15 * * *"
+    - cron: "40 17 * * *"
 
   workflow_dispatch:
 
